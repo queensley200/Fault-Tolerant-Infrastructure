@@ -61,9 +61,10 @@ resource "aws_lb_listener" "app" {
 
 # Create launch template
 resource "aws_launch_template" "app" {
-  name_prefix   = "${var.environment}-app-lt"
-  image_id      = "ami-0c7217cdde317cfec" # Ubuntu 22.04 LTS
+  name_prefix   = "${var.environment}-app-template"
+  image_id      = "ami-0f1c3f3f1f1f1f1f1"  # Amazon Linux 2 AMI ID for eu-north-1
   instance_type = var.app_instance_type
+  key_name      = var.key_name
 
   network_interfaces {
     associate_public_ip_address = false
@@ -72,10 +73,11 @@ resource "aws_launch_template" "app" {
 
   user_data = base64encode(<<-EOF
               #!/bin/bash
-              apt-get update
-              apt-get install -y nginx
-              systemctl start nginx
-              systemctl enable nginx
+              yum update -y
+              yum install -y httpd
+              systemctl start httpd
+              systemctl enable httpd
+              echo "<h1>Welcome to ${var.environment} environment</h1>" > /var/www/html/index.html
               EOF
   )
 

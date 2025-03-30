@@ -90,6 +90,7 @@ module "compute" {
   app_min_size     = var.app_min_size
   app_max_size     = var.app_max_size
   app_desired_capacity = var.app_desired_capacity
+  key_name         = var.key_name
 }
 
 module "database" {
