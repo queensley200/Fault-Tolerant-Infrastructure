@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "terraform-state-bucket-${random_id.bucket_suffix.hex}"
+    bucket         = "fault-tolerant-infrastructure-state"
     key            = "terraform.tfstate"
     region         = "eu-north-1"
     encrypt        = true
@@ -26,7 +26,7 @@ resource "random_id" "bucket_suffix" {
 
 # Create S3 bucket for Terraform state
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform-state-bucket-${random_id.bucket_suffix.hex}"
+  bucket = "fault-tolerant-infrastructure-state"
 }
 
 # Enable versioning for state file
