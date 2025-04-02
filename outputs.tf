@@ -23,9 +23,14 @@ output "private_subnet_ids" {
   value       = module.networking.private_subnet_ids
 }
 
-output "cloudwatch_log_group" {
-  description = "The name of the CloudWatch log group"
-  value       = module.monitoring.cloudwatch_log_group
+output "cloudwatch_log_group_app" {
+  description = "The name of the CloudWatch log group for application logs"
+  value       = module.monitoring.cloudwatch_log_group_app
+}
+
+output "cloudwatch_log_group_alb" {
+  description = "The name of the CloudWatch log group for ALB logs"
+  value       = module.monitoring.cloudwatch_log_group_alb
 }
 
 output "s3_bucket_name" {

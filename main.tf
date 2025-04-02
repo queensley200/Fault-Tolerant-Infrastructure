@@ -5,23 +5,10 @@ terraform {
       version = "~> 5.0"
     }
   }
-
-  backend "s3" {
-    bucket         = "fault-tolerant-infrastructure-state"
-    key            = "terraform.tfstate"
-    region         = "eu-north-1"
-    encrypt        = true
-    dynamodb_table = "terraform-state-lock"
-  }
 }
 
 provider "aws" {
   region = var.aws_region
-}
-
-# Generate random suffix for S3 bucket name
-resource "random_id" "bucket_suffix" {
-  byte_length = 4
 }
 
 # Create S3 bucket for Terraform state
